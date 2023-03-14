@@ -8,7 +8,12 @@ interface SpeciesNameProps {
 const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
     return (
         <>
-            <label className="form__label">Species Name:</label>
+            <label
+                className="form__label"
+                // htmlFor="speciesName"
+            >
+                Species Name:
+            </label>
             <input
                 className="form__input"
                 type="text"
@@ -16,7 +21,10 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
                 value={input || ""}
                 placeholder={"Species Name"}
                 onChange={handleChange}
+                // id="speciesName"
+                aria-label="speciesName"
             />
+
             <ErrorMsg message="validation message" display={true} />
         </>
     );

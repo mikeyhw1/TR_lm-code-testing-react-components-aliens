@@ -9,7 +9,7 @@ import Input from "../interface";
 
 const W12MForm = () => {
     const [inputs, setInputs] = useState<Input>({
-        speciesName: "",
+        speciesName: "aaa",
         planetName: "",
         numberOfBeings: 0,
         reason: "",
@@ -30,6 +30,8 @@ const W12MForm = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        // console.log(`input: `, inputs);
     };
 
     return (

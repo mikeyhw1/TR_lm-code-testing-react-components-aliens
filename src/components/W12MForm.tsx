@@ -9,13 +9,14 @@ import Input from "../interface";
 
 const W12MForm = () => {
     const [inputs, setInputs] = useState<Input>({
-        speciesName: "aaa",
+        speciesName: "",
         planetName: "",
         numberOfBeings: 0,
-        reason: "",
         quizAnswer: "Not 4",
         reasonForSparing: "",
     });
+
+    const [submittedAnswer, setSubmittedAnswer] = useState<Input | undefined>(undefined);
 
     const handleChange = (
         event:
@@ -32,6 +33,9 @@ const W12MForm = () => {
         event.preventDefault();
 
         // console.log(`input: `, inputs);
+        if (inputs !== undefined) {
+            setSubmittedAnswer(inputs);
+        }
     };
 
     return (
@@ -52,12 +56,25 @@ const W12MForm = () => {
             </div>
 
             <div className="form__container">
-                <h2>Answer Review:</h2>
+                <label>Answer Review:</label>
                 <p>{inputs.speciesName}</p>
                 <p>{inputs.planetName}</p>
                 <p>{inputs.numberOfBeings}</p>
                 <p>{inputs.quizAnswer}</p>
                 <p>{inputs.reasonForSparing}</p>
+            </div>
+
+            <div className="form__container">
+                <label>Submitted Answer:</label>
+                {submittedAnswer !== undefined && (
+                    <>
+                        <p>{submittedAnswer.speciesName}</p>
+                        <p>{submittedAnswer.planetName}</p>
+                        <p>{submittedAnswer.numberOfBeings}</p>
+                        <p>{submittedAnswer.quizAnswer}</p>
+                        <p>{submittedAnswer.reasonForSparing}</p>
+                    </>
+                )}
             </div>
         </section>
     );

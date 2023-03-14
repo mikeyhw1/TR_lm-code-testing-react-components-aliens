@@ -1,4 +1,4 @@
-# Testing React Components!
+# Testing React Components
 
 Terrible news! Aliens have invaded Earth. 👽 👾 👽 👾 👽 👾
 

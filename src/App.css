@@ -14,10 +14,27 @@ body {
 .form__container {
     /* display: block; */
     border: 1px solid red;
-    margin: 10%;
+    margin: 2em;
+}
+
+.form__label {
+    /* top right bottom left  */
+    margin: 0em 0em 0em 1em;
 }
 
 .form__input {
     display: block;
-    margin: 1%;
+    margin: 0em 0em 0em 3em;
+}
+
+.form__errorMsg--display {
+    color: red;
+    display: block;
+    margin: 0em 0em 0em 5em;
+}
+
+.form__errorMsg--hide {
+    color: red;
+    display: none;
+    margin: 0em 0em 0em 5em;
 }

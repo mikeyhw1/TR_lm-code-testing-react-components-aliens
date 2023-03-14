@@ -9,18 +9,12 @@ import SpeciesName from "./SpeciesName";
 // });
 
 test("renders SpeciesName input", async () => {
-    const input = "bbb";
+    const input = "test value";
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
     render(<SpeciesName input={input} handleChange={handleChange} />);
 
     expect(screen.getByPlaceholderText("Species Name")).toBeInTheDocument();
-
-    // aria-label
-
-    // expect(screen.getByRole("textbox", { name: "speciesName" })).toBeInTheDocument();
-    // NOTE: aria-label
-
-    expect(screen.getByLabelText("speciesName")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Species Name")).toHaveDisplayValue("test value");
 
     // FAIL:
     // expect(screen.getByPlaceholderText("Species Name")).toHaveValue("bbb");
@@ -28,23 +22,12 @@ test("renders SpeciesName input", async () => {
     // expect(screen.getByRole("textbox", { name: "speciesName" })).toHaveValue("");
     // expect(screen.getByRole("textbox", { name: "speciesName" })).toHaveDisplayValue("");
 
-    // expect(screen.getByRole("textbox", { name: "speciesName" })).toBeInTheDocument();
-
-    // const aaa = screen.getAllByPlaceholderText("Species Name");
-
-    // await expect(aaa).toHaveDisplayValue("aaa");
-
-    // expect(aaa).toHaveDisplayValue("aaa");
-    // .find((i) => i.nodeValue === "aaa");
-    // expect(aaa).toHaveDisplayValue("");
-    // await waitFor(() => expect(inputField).toHaveDisplayValue('John Doe')));
-
-    // expect(screen.getByLabelText("speciesName")).toHaveValue("");
-
-    // const aaa = screen.getByRole("textbox", { name: "speciesName" });
-    // expect(screen.getByRole('input', { name: 'speciesName' }).value).toBe('test');
-
-    // expect(screen.getByLabelText("speciesName").value)
+    // aria-label
 });
+
+
+
+
+
 
 // expect(await screen.findByText('Invalid User Name')).not.toBeVisible()

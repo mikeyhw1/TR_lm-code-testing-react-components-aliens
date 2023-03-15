@@ -21,7 +21,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ input, handleChange
                 onChange={handleChange}
                 id="reasonForSparing"
             />
-            <ErrorMsg message="validation message" display={true} />
+            {/* <ErrorMsg message="validation message" display={true} /> */}
         </>
     );
 };

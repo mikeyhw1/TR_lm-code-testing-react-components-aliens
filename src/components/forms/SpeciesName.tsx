@@ -9,21 +9,21 @@ interface SpeciesNameProps {
 
 const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
     const [errorDisplay, setErrorDisplay] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [errorMessageArray, setErrorMessageArray] = useState<string[]>([]);
 
     const validation = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const testInput = e.target.value;
         const validateResult = {
             validationError: false,
-            tempErrorMsg: "Error: ",
+            tempErrorMsgArray: [],
         };
         await validation_speciesName(testInput, validateResult);
         if (validateResult.validationError) {
             setErrorDisplay(true);
-            setErrorMessage(validateResult.tempErrorMsg);
+            setErrorMessageArray(validateResult.tempErrorMsgArray);
         } else {
             setErrorDisplay(false);
-            setErrorMessage("");
+            setErrorMessageArray([]);
         }
     };
 
@@ -47,23 +47,23 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
                 // aria-label="speciesName"
             />
 
-            <ErrorMsg message={errorMessage} display={errorDisplay} />
+            <ErrorMsg messageArray={errorMessageArray} display={errorDisplay} />
         </>
     );
 };
 
 const validation_speciesName = async (
     testInput: string,
-    validateResult: { validationError: boolean; tempErrorMsg: string }
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
 ) =>
     // setErrorDisplay: React.Dispatch<React.SetStateAction<boolean>>,
     // setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
     // handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     // e: React.ChangeEvent<HTMLInputElement>
     {
-        await test_failMinLength(testInput, 3, validateResult);
+        await test_failMinLength(testInput, 3, validateResult, "Species Name");
         // TOFIX: max 23
-        await test_failMaxLength(testInput, 6, validateResult);
+        await test_failMaxLength(testInput, 6, validateResult, "Species Name");
 
         return validateResult;
         // let tempErrorDisplay = false;

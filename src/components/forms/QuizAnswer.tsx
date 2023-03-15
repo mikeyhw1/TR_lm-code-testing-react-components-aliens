@@ -17,7 +17,7 @@ const QuizAnswer: React.FC<QuizAnswerProps> = ({ input, handleChange }) => {
                 <option value="666">666</option>
                 <option value="4">4</option>
             </select>
-            <ErrorMsg message="validation message" display={true} />
+            {/* <ErrorMsg message="validation message" display={true} /> */}
         </>
     );
 };

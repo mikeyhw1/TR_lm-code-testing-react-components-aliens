@@ -20,7 +20,7 @@ const PlanetName: React.FC<PlanetNameProps> = ({ input, handleChange }) => {
                 onChange={handleChange}
                 id="planetName"
             />
-            <ErrorMsg message="validation message" display={true} />
+            {/* <ErrorMsg message="validation message" display={true} /> */}
         </>
     );
 };

@@ -20,7 +20,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ input, handleChange }) 
                 onChange={handleChange}
                 id="numberOfBeings"
             />
-            <ErrorMsg message="validation message" display={true} />
+            {/* <ErrorMsg message="validation message" display={true} /> */}
         </>
     );
 };

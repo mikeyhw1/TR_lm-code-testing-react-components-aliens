@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { test_failMaxLength, test_failMinLength } from "../validator/validator";
+import {
+    test_failMaxLength,
+    test_failMinLength,
+    test_failNoNumbers,
+    test_failNoSpecialCharacters,
+} from "../validator/validator";
 import ErrorMsg from "./ErrorMsg";
 
 interface SpeciesNameProps {
@@ -40,11 +45,9 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
                 placeholder={"Species Name"}
                 onChange={(e) => {
                     validation(e);
-                    // validation(setErrorDisplay, setErrorMessage, handleChange, e);
                     handleChange(e);
                 }}
                 id="speciesName"
-                // aria-label="speciesName"
             />
 
             <ErrorMsg messageArray={errorMessageArray} display={errorDisplay} />
@@ -55,29 +58,11 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
 const validation_speciesName = async (
     testInput: string,
     validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
-) =>
-    // setErrorDisplay: React.Dispatch<React.SetStateAction<boolean>>,
-    // setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
-    // handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    // e: React.ChangeEvent<HTMLInputElement>
-    {
-        await test_failMinLength(testInput, 3, validateResult, "Species Name");
-        // TOFIX: max 23
-        await test_failMaxLength(testInput, 6, validateResult, "Species Name");
-
-        return validateResult;
-        // let tempErrorDisplay = false;
-        // let tempErrorMsg = "Error: ";
-        // console.log(`1 tempErrorDisplay: ${temp.tempErrorDisplay}`);
-        // console.log(`1 tempErrorMsg: ${temp.tempErrorMsg}`);
-
-        // console.log(`2 tempErrorDisplay: ${temp.tempErrorDisplay}`);
-        // console.log(`2 tempErrorMsg: ${temp.tempErrorMsg}`);
-
-        // const errorMsg_minLength = failMinLength(input, 3, tempErrorDisplay, tempErrorMsg);
-        // if (errorMsg_minLength) {
-        //     tempErrorDisplay = true;
-        //     tempErrorMsg += errorMsg_minLength;
-        // }
-    };
+) => {
+    await test_failMinLength(testInput, 3, validateResult, "Species Name");
+    await test_failMaxLength(testInput, 23, validateResult, "Species Name");
+    await test_failNoNumbers(testInput, validateResult, "Species Name");
+    await test_failNoSpecialCharacters(testInput, validateResult, "Species Name");
+    return validateResult;
+};
 export default SpeciesName;

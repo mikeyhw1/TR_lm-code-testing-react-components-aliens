@@ -14,6 +14,7 @@ test("renders ReasonForSparing prop input", () => {
     const handleChange = () => {};
     render(<ReasonForSparing input={input} handleChange={handleChange} />);
 
+    expect(screen.getByRole("textbox", { name: "Reason for sparing:" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Reason for sparing")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Reason for sparing")).toHaveValue("test value");
 });

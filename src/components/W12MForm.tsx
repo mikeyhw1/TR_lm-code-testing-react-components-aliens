@@ -51,7 +51,7 @@ const W12MForm = () => {
                     <QuizAnswer input={inputs.quizAnswer} handleChange={handleChange} />
                     <ReasonForSparing input={inputs.reasonForSparing} handleChange={handleChange} />
 
-                    <input type="submit" />
+                    <input type="submit" className="form__button" value="Submit Request" />
                 </form>
             </div>
 
@@ -68,11 +68,11 @@ const W12MForm = () => {
                 <label>Submitted Answer:</label>
                 {submittedAnswer !== undefined && (
                     <>
-                        <p>{submittedAnswer.speciesName}</p>
-                        <p>{submittedAnswer.planetName}</p>
-                        <p>{submittedAnswer.numberOfBeings}</p>
-                        <p>{submittedAnswer.quizAnswer}</p>
-                        <p>{submittedAnswer.reasonForSparing}</p>
+                        <p data-testid="submitted_speciesName">{submittedAnswer.speciesName}</p>
+                        <p data-testid="submitted_planetName">{submittedAnswer.planetName}</p>
+                        <p data-testid="submitted_numberOfBeings">{submittedAnswer.numberOfBeings}</p>
+                        <p data-testid="submitted_quizAnswer">{submittedAnswer.quizAnswer}</p>
+                        <p data-testid="submitted_reasonForSparing">{submittedAnswer.reasonForSparing}</p>
                     </>
                 )}
             </div>

@@ -8,7 +8,9 @@ interface PlanetNameProps {
 const PlanetName: React.FC<PlanetNameProps> = ({ input, handleChange }) => {
     return (
         <>
-            <label className="form__label">Planet Name:</label>
+            <label className="form__label" htmlFor="planetName">
+                Planet Name:
+            </label>
             <input
                 className="form__input"
                 type="text"
@@ -16,6 +18,7 @@ const PlanetName: React.FC<PlanetNameProps> = ({ input, handleChange }) => {
                 value={input || ""}
                 placeholder={"Planet Name"}
                 onChange={handleChange}
+                id="planetName"
             />
             <ErrorMsg message="validation message" display={true} />
         </>

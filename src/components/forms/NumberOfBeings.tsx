@@ -8,7 +8,9 @@ interface NumberOfBeingsProps {
 const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ input, handleChange }) => {
     return (
         <>
-            <label className="form__label">Number of beings:</label>
+            <label className="form__label" htmlFor="numberOfBeings">
+                Number of beings:
+            </label>
             <input
                 className="form__input"
                 type="number"
@@ -16,6 +18,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ input, handleChange }) 
                 value={input || ""}
                 placeholder={"Number of beings"}
                 onChange={handleChange}
+                id="numberOfBeings"
             />
             <ErrorMsg message="validation message" display={true} />
         </>

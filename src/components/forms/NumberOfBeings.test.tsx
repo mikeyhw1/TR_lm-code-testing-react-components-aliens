@@ -15,6 +15,7 @@ test("renders NumberOfBeings prop input", () => {
     render(<NumberOfBeings input={input} handleChange={handleChange} />);
 
     expect(screen.getByPlaceholderText("Number of beings")).toBeInTheDocument();
+    expect(screen.getByRole("spinbutton", { name: "Number of beings:" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Number of beings")).toHaveValue(666);
 });
 

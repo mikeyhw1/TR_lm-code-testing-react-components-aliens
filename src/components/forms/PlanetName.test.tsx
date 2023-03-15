@@ -15,6 +15,7 @@ test("renders PlanetName prop input", () => {
     render(<PlanetName input={input} handleChange={handleChange} />);
 
     expect(screen.getByPlaceholderText("Planet Name")).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Planet Name:" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Planet Name")).toHaveValue("test value");
 });
 

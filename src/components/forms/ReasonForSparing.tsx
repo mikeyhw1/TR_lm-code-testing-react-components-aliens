@@ -8,7 +8,9 @@ interface ReasonForSparingProps {
 const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ input, handleChange }) => {
     return (
         <>
-            <label className="form__label">Reason for sparing:</label>
+            <label className="form__label" htmlFor="reasonForSparing">
+                Reason for sparing:
+            </label>
             <textarea
                 className="form__input"
                 cols={50}
@@ -17,6 +19,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ input, handleChange
                 value={input || ""}
                 placeholder={"Reason for sparing"}
                 onChange={handleChange}
+                id="reasonForSparing"
             />
             <ErrorMsg message="validation message" display={true} />
         </>

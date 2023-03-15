@@ -14,6 +14,7 @@ test("renders QuizAnswer prop input", () => {
     const handleChange = () => {};
     render(<QuizAnswer input={input} handleChange={handleChange} />);
 
+    expect(screen.getByRole("combobox", { name: "What is 2+2?" })).toBeInTheDocument();
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     expect(screen.getByRole("combobox")).toHaveValue("Not 4");
 });

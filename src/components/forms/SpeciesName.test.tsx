@@ -15,6 +15,7 @@ test("renders SpeciesName prop input", () => {
     render(<SpeciesName input={input} handleChange={handleChange} />);
 
     expect(screen.getByPlaceholderText("Species Name")).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Species Name:" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Species Name")).toHaveValue("test value");
 });
 
@@ -28,11 +29,4 @@ test("SpeciesName input handleChange", async () => {
 
     await userEvent.type(element, "Mike");
     expect(mock).toHaveBeenCalledTimes(4);
-
-    // expect(element).toHaveValue("Mike");
-    // NOTE: 💀💀💀💀💀💀 Took me long enough to find out it is impossible to test for text after onchange
-    // Is there any way to test it?
-    // Or we can only test at the upper parent layer?
 });
-
-// expect(await screen.findByText('Invalid User Name')).not.toBeVisible()

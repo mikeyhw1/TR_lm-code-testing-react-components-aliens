@@ -1,4 +1,6 @@
+import { useState } from "react";
 import ErrorMsg from "./ErrorMsg";
+import { test_failMaxLength, test_failMinLength } from "../validator/validator";
 
 interface ReasonForSparingProps {
     input: string;
@@ -6,6 +8,25 @@ interface ReasonForSparingProps {
 }
 
 const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ input, handleChange }) => {
+    const [errorDisplay, setErrorDisplay] = useState<boolean>(false);
+    const [errorMessageArray, setErrorMessageArray] = useState<string[]>([]);
+
+    const validation = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const testInput = e.target.value;
+        const validateResult = {
+            validationError: false,
+            tempErrorMsgArray: [],
+        };
+        await validation_reasonForSparing(testInput, validateResult);
+        if (validateResult.validationError) {
+            setErrorDisplay(true);
+            setErrorMessageArray(validateResult.tempErrorMsgArray);
+        } else {
+            setErrorDisplay(false);
+            setErrorMessageArray([]);
+        }
+    };
+
     return (
         <>
             <label className="form__label" htmlFor="reasonForSparing">
@@ -18,11 +39,24 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ input, handleChange
                 name="reasonForSparing"
                 value={input || ""}
                 placeholder={"Reason for sparing"}
-                onChange={handleChange}
+                onChange={(e) => {
+                    validation(e);
+                    handleChange(e);
+                }}
                 id="reasonForSparing"
             />
-            {/* <ErrorMsg message="validation message" display={true} /> */}
+            <ErrorMsg messageArray={errorMessageArray} display={errorDisplay} />
         </>
     );
 };
+
+export const validation_reasonForSparing = async (
+    testInput: string,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
+) => {
+    await test_failMinLength(testInput, 17, validateResult, "Reason for sparing");
+    await test_failMaxLength(testInput, 153, validateResult, "Reason for sparing");
+    return validateResult;
+};
+
 export default ReasonForSparing;

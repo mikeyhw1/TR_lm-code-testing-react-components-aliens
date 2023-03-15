@@ -49,13 +49,12 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ input, handleChange }) => {
                 }}
                 id="speciesName"
             />
-
             <ErrorMsg messageArray={errorMessageArray} display={errorDisplay} />
         </>
     );
 };
 
-const validation_speciesName = async (
+export const validation_speciesName = async (
     testInput: string,
     validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
 ) => {
@@ -65,4 +64,5 @@ const validation_speciesName = async (
     await test_failNoSpecialCharacters(testInput, validateResult, "Species Name");
     return validateResult;
 };
+
 export default SpeciesName;

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import ErrorMsg from "./ErrorMsg";
+import { test_failIsNumbers, test_failMinValue } from "../validator/validator";
 
 interface NumberOfBeingsProps {
     input: number;
@@ -6,6 +8,25 @@ interface NumberOfBeingsProps {
 }
 
 const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ input, handleChange }) => {
+    const [errorDisplay, setErrorDisplay] = useState<boolean>(false);
+    const [errorMessageArray, setErrorMessageArray] = useState<string[]>([]);
+
+    const validation = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const testInput = e.target.value;
+        const validateResult = {
+            validationError: false,
+            tempErrorMsgArray: [],
+        };
+        await validation_numberOfBeings(testInput, validateResult);
+        if (validateResult.validationError) {
+            setErrorDisplay(true);
+            setErrorMessageArray(validateResult.tempErrorMsgArray);
+        } else {
+            setErrorDisplay(false);
+            setErrorMessageArray([]);
+        }
+    };
+
     return (
         <>
             <label className="form__label" htmlFor="numberOfBeings">
@@ -17,11 +38,24 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ input, handleChange }) 
                 name="numberOfBeings"
                 value={input || ""}
                 placeholder={"Number of beings"}
-                onChange={handleChange}
+                onChange={(e) => {
+                    validation(e);
+                    handleChange(e);
+                }}
                 id="numberOfBeings"
             />
-            {/* <ErrorMsg message="validation message" display={true} /> */}
+            <ErrorMsg messageArray={errorMessageArray} display={errorDisplay} />
         </>
     );
 };
+
+export const validation_numberOfBeings = async (
+    testInput: string,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
+) => {
+    await test_failIsNumbers(testInput, validateResult, "Number of beings");
+    await test_failMinValue(testInput, 1000000000, validateResult, "Number of beings");
+    return validateResult;
+};
+
 export default NumberOfBeings;

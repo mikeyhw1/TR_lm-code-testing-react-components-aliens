@@ -1,3 +1,6 @@
+// NOTE: should have seperate out pure validate logic,
+// put I have no time for this right now
+
 export function test_failMinLength(
     input: string,
     min: number,
@@ -30,6 +33,36 @@ export function test_failMaxLength(
     });
 }
 
+// export const minValue = (min: number) => {
+// 	return (value: string) => {
+// 		if (isNumeric(value)) {
+// 			const num = Number.parseInt(value);
+// 			return num >= min ? undefined : `Must be at least ${min}`;
+// 		}
+// 		return `Not a valid integer.`;
+// 	};
+// };
+
+export function test_failMinValue(
+    input: string,
+    minValue: number,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] },
+    inputName: string
+) {
+    return new Promise<void>((resolve, reject) => {
+        if (isNumeric(input)) {
+            const num = Number.parseInt(input);
+            if (num < minValue) {
+                validateResult.validationError = true;
+                validateResult.tempErrorMsgArray.push(`${inputName} must be at least ${minValue}`);
+                resolve();
+            }
+            resolve();
+        }
+        resolve();
+    });
+}
+
 export function test_failNoNumbers(
     input: string,
     validateResult: { validationError: boolean; tempErrorMsgArray: string[] },
@@ -40,6 +73,21 @@ export function test_failNoNumbers(
         if (numbers.test(input)) {
             validateResult.validationError = true;
             validateResult.tempErrorMsgArray.push(`${inputName} must have NO numbers!`);
+            resolve();
+        }
+        resolve();
+    });
+}
+
+export function test_failIsNumbers(
+    input: string,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] },
+    inputName: string
+) {
+    return new Promise<void>((resolve, reject) => {
+        if (!isNumeric(input)) {
+            validateResult.validationError = true;
+            validateResult.tempErrorMsgArray.push(`${inputName} must be numbers only!`);
             resolve();
         }
         resolve();
@@ -60,4 +108,25 @@ export function test_failNoSpecialCharacters(
         }
         resolve();
     });
+}
+
+export function test_failMatchAnswer(
+    input: string,
+    answer: string,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] },
+    inputName: string
+) {
+    return new Promise<void>((resolve, reject) => {
+        if (input !== answer) {
+            validateResult.validationError = true;
+            validateResult.tempErrorMsgArray.push(`'${input}' is a wrong answer for '${inputName}'!`);
+            resolve();
+        }
+        resolve();
+    });
+}
+
+function isNumeric(value: string) {
+    if (typeof value !== "string") return false;
+    return !isNaN(+value) && !isNaN(parseFloat(value));
 }

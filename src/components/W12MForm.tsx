@@ -56,7 +56,7 @@ const W12MForm = () => {
             </div>
 
             <div className="form__container">
-                <label>Answer Review:</label>
+                <label>Answer Preview:</label>
                 <p>{inputs.speciesName}</p>
                 <p>{inputs.planetName}</p>
                 <p>{inputs.numberOfBeings}</p>

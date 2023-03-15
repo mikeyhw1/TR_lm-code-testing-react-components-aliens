@@ -3,9 +3,17 @@ interface ErrorMsgProps {
     display: boolean;
 }
 
-// {todos.map((message) => <Item key={message} message={message} />)}
 const ErrorMsg: React.FC<ErrorMsgProps> = ({ messageArray, display }) => {
-    return <>{display === true && messageArray.map((i) => <h3 className="form__errorMsg--display">{i}</h3>)}</>;
+    return (
+        <>
+            {display === true &&
+                messageArray.map((i) => (
+                    <h3 className="form__errorMsg--display" key={i}>
+                        {i}
+                    </h3>
+                ))}
+        </>
+    );
 };
 export default ErrorMsg;
 

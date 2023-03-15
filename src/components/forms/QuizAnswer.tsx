@@ -9,7 +9,13 @@ const QuizAnswer: React.FC<QuizAnswerProps> = ({ input, handleChange }) => {
     return (
         <>
             <label className="form__label">What is 2+2?</label>
-            <select className="form__input" name="quizAnswer" value={input} onChange={handleChange}>
+            <select
+                className="form__input"
+                name="quizAnswer"
+                value={input}
+                onChange={handleChange}
+                placeholder={"Species Name"}
+            >
                 <option value="Not 4">Not 4</option>
                 <option value="Alien">Alien</option>
                 <option value="666">666</option>

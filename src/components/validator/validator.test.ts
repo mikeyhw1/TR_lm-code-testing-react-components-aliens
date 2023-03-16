@@ -1,5 +1,6 @@
 import {
     test_failIsNumbers,
+    test_failMatchAnswer,
     test_failMaxLength,
     test_failMinLength,
     test_failMinValue,
@@ -186,6 +187,26 @@ describe("test test_failNoSpecialCharacters", () => {
         const validateResult = { validationError: false, tempErrorMsgArray: [] };
         const inputName = "testing";
         await test_failIsNumbers(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(true);
+    });
+});
+
+describe("test test_failMatchAnswer", () => {
+    it("returns false if valiation pass, test match requirment", async () => {
+        const input = "aa bb 22";
+        const answer = "aa bb 22";
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failMatchAnswer(input, answer, validateResult, inputName);
+        expect(validateResult.validationError).toBe(false);
+    });
+
+    it("returns true if valiation fail, test NOT match", async () => {
+        const input = "aa bb 22";
+        const answer = "aa bb";
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failMatchAnswer(input, answer, validateResult, inputName);
         expect(validateResult.validationError).toBe(true);
     });
 });

@@ -30,12 +30,3 @@ it("SpeciesName input handleChange", async () => {
     await userEvent.type(element, "Mike");
     expect(mock).toHaveBeenCalledTimes(4);
 });
-
-// it("test ?????????", async () => {
-//     const input = "";
-//     const mock = jest.fn();
-//     render(<SpeciesName input={input} handleChange={mock} />);
-
-//     const input_speciesName = screen.getByRole("textbox", { name: "Species Name:" });
-//     expect(input_speciesName).toBeInTheDocument();
-// });

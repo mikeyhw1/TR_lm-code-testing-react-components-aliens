@@ -8,7 +8,7 @@ const ErrorMsg: React.FC<ErrorMsgProps> = ({ messageArray, display }) => {
         <>
             {display === true &&
                 messageArray.map((i) => (
-                    <h3 className="form__errorMsg--display" key={i}>
+                    <h3 className="form__errorMsg--display" key={i} data-testid="errorMessage">
                         {i}
                     </h3>
                 ))}

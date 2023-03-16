@@ -33,16 +33,6 @@ export function test_failMaxLength(
     });
 }
 
-// export const minValue = (min: number) => {
-// 	return (value: string) => {
-// 		if (isNumeric(value)) {
-// 			const num = Number.parseInt(value);
-// 			return num >= min ? undefined : `Must be at least ${min}`;
-// 		}
-// 		return `Not a valid integer.`;
-// 	};
-// };
-
 export function test_failMinValue(
     input: string,
     minValue: number,

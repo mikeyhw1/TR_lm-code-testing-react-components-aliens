@@ -1,10 +1,10 @@
 import { useState } from "react";
 import W12MHeader from "./W12MHeader";
-import SpeciesName from "./forms/SpeciesName";
-import PlanetName from "./forms/PlanetName";
-import NumberOfBeings from "./forms/NumberOfBeings";
-import QuizAnswer from "./forms/QuizAnswer";
-import ReasonForSparing from "./forms/ReasonForSparing";
+import SpeciesName, { validation_speciesName } from "./forms/SpeciesName";
+import PlanetName, { validation_planetName } from "./forms/PlanetName";
+import NumberOfBeings, { validation_numberOfBeings } from "./forms/NumberOfBeings";
+import QuizAnswer, { validation_quizAnswer } from "./forms/QuizAnswer";
+import ReasonForSparing, { validation_reasonForSparing } from "./forms/ReasonForSparing";
 import Input from "../interface";
 
 const W12MForm = () => {
@@ -29,11 +29,20 @@ const W12MForm = () => {
         setInputs((values) => ({ ...values, [name]: value }));
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        await validation_speciesName(inputs.speciesName, validateResult);
+        await validation_planetName(inputs.planetName, validateResult);
+        await validation_numberOfBeings(inputs.numberOfBeings.toString(), validateResult);
+        await validation_quizAnswer(inputs.quizAnswer, validateResult);
+        await validation_reasonForSparing(inputs.reasonForSparing, validateResult);
+
         // console.log(`input: `, inputs);
-        if (inputs !== undefined) {
+        if (validateResult.validationError === true) {
+            alert("ERROR! Field(s) is invalid. Please check before resubmit!");
+        } else {
             setSubmittedAnswer(inputs);
         }
     };

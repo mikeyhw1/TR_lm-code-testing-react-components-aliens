@@ -364,23 +364,71 @@ test("test button submit success", async () => {
     await user.type(input_reasonForSparing, "I am your father, may the force be with you!");
     await user.click(submitButton);
 
-    const submitted_speciesName = screen.getByTestId("submitted_speciesName");
-    expect(submitted_speciesName).toBeInTheDocument();
-    expect(submitted_speciesName).toHaveTextContent("Greedy Human");
+    await waitFor(() => {
+        const submitted_speciesName = screen.getByTestId("submitted_speciesName");
+        expect(submitted_speciesName).toBeInTheDocument();
+        expect(submitted_speciesName).toHaveTextContent("Greedy Human");
 
-    const submitted_planetName = screen.getByTestId("submitted_planetName");
-    expect(submitted_planetName).toBeInTheDocument();
-    expect(submitted_planetName).toHaveTextContent("Moon");
+        const submitted_planetName = screen.getByTestId("submitted_planetName");
+        expect(submitted_planetName).toBeInTheDocument();
+        expect(submitted_planetName).toHaveTextContent("Moon");
 
-    const submitted_numberOfBeings = screen.getByTestId("submitted_numberOfBeings");
-    expect(submitted_numberOfBeings).toBeInTheDocument();
-    expect(submitted_numberOfBeings).toHaveTextContent("5000000000");
+        const submitted_numberOfBeings = screen.getByTestId("submitted_numberOfBeings");
+        expect(submitted_numberOfBeings).toBeInTheDocument();
+        expect(submitted_numberOfBeings).toHaveTextContent("5000000000");
 
-    const submitted_quizAnswer = screen.getByTestId("submitted_quizAnswer");
-    expect(submitted_quizAnswer).toBeInTheDocument();
-    expect(submitted_quizAnswer).toHaveTextContent("4");
+        const submitted_quizAnswer = screen.getByTestId("submitted_quizAnswer");
+        expect(submitted_quizAnswer).toBeInTheDocument();
+        expect(submitted_quizAnswer).toHaveTextContent("4");
 
-    const submitted_reasonForSparing = screen.getByTestId("submitted_reasonForSparing");
-    expect(submitted_reasonForSparing).toBeInTheDocument();
-    expect(submitted_reasonForSparing).toHaveTextContent("I am your father, may the force be with you!");
+        const submitted_reasonForSparing = screen.getByTestId("submitted_reasonForSparing");
+        expect(submitted_reasonForSparing).toBeInTheDocument();
+        expect(submitted_reasonForSparing).toHaveTextContent("I am your father, may the force be with you!");
+    });
+});
+
+test("test button submit failed", async () => {
+    render(<W12MForm />);
+
+    const input_speciesName = screen.getByRole("textbox", { name: "Species Name:" });
+    expect(input_speciesName).toBeInTheDocument();
+
+    const input_planetName = screen.getByRole("textbox", { name: "Planet Name:" });
+    expect(input_planetName).toBeInTheDocument();
+
+    const input_numberOfBeings = screen.getByRole("spinbutton", { name: "Number of beings:" });
+    expect(input_numberOfBeings).toBeInTheDocument();
+
+    const input_quizAnswer = screen.getByRole("combobox", { name: "What is 2+2?" });
+    expect(input_quizAnswer).toBeInTheDocument();
+
+    const input_reasonForSparing = screen.getByRole("textbox", { name: "Reason for sparing:" });
+    expect(input_reasonForSparing).toBeInTheDocument();
+
+    const submitButton = screen.getByRole("button");
+    expect(submitButton).toBeInTheDocument();
+
+    await user.type(input_speciesName, "Greedy Human");
+    await user.type(input_planetName, "Moon");
+    await user.type(input_numberOfBeings, "3000");
+    await user.selectOptions(input_quizAnswer, "4");
+    await user.type(input_reasonForSparing, "I am your father, may the force be with you!");
+    await user.click(submitButton);
+
+    await waitFor(() => {
+        const submitted_speciesName = screen.queryByTestId("submitted_speciesName");
+        expect(submitted_speciesName).toBeNull();
+
+        const submitted_planetName = screen.queryByTestId("submitted_planetName");
+        expect(submitted_planetName).toBeNull();
+
+        const submitted_numberOfBeings = screen.queryByTestId("submitted_numberOfBeings");
+        expect(submitted_numberOfBeings).toBeNull();
+
+        const submitted_quizAnswer = screen.queryByTestId("submitted_quizAnswer");
+        expect(submitted_quizAnswer).toBeNull();
+
+        const submitted_reasonForSparing = screen.queryByTestId("submitted_reasonForSparing");
+        expect(submitted_reasonForSparing).toBeNull();
+    });
 });

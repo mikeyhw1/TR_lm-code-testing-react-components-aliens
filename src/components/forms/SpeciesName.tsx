@@ -4,6 +4,7 @@ import {
     test_failMinLength,
     test_failNoNumbers,
     test_failNoSpecialCharacters,
+    test_failValidEntry,
 } from "../validator/validator";
 import ErrorMsg from "./ErrorMsg";
 
@@ -62,6 +63,7 @@ export const validation_speciesName = async (
     await test_failMaxLength(testInput, 23, validateResult, "Species Name");
     await test_failNoNumbers(testInput, validateResult, "Species Name");
     await test_failNoSpecialCharacters(testInput, validateResult, "Species Name");
+    await test_failValidEntry(testInput, validateResult, "Species Name");
     return validateResult;
 };
 

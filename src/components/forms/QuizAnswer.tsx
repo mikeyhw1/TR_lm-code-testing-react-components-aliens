@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ErrorMsg from "./ErrorMsg";
-import { test_failMatchAnswer } from "../validator/validator";
+import { test_failMatchAnswer, test_failValidEntry } from "../validator/validator";
 
 interface QuizAnswerProps {
     input: string;
@@ -57,7 +57,7 @@ export const validation_quizAnswer = async (
     validateResult: { validationError: boolean; tempErrorMsgArray: string[] }
 ) => {
     await test_failMatchAnswer(testInput, "4", validateResult, "What is 2+2?");
-
+    await test_failValidEntry(testInput, validateResult, "What is 2+2?");
     return validateResult;
 };
 

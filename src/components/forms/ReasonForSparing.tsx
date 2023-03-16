@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ErrorMsg from "./ErrorMsg";
-import { test_failMaxLength, test_failMinLength } from "../validator/validator";
+import { test_failMaxLength, test_failMinLength, test_failValidEntry } from "../validator/validator";
 
 interface ReasonForSparingProps {
     input: string;
@@ -56,6 +56,7 @@ export const validation_reasonForSparing = async (
 ) => {
     await test_failMinLength(testInput, 17, validateResult, "Reason for sparing");
     await test_failMaxLength(testInput, 153, validateResult, "Reason for sparing");
+    await test_failValidEntry(testInput, validateResult, "Reason for sparing");
     return validateResult;
 };
 

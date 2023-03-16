@@ -116,6 +116,21 @@ export function test_failMatchAnswer(
     });
 }
 
+export function test_failValidEntry(
+    input: string | number | null | undefined,
+    validateResult: { validationError: boolean; tempErrorMsgArray: string[] },
+    inputName: string
+) {
+    return new Promise<void>((resolve, reject) => {
+        if (input === null || input === undefined || input === 0 || input === "" || input === "0") {
+            validateResult.validationError = true;
+            validateResult.tempErrorMsgArray.push(`'${inputName}' cannot have invalid entry!`);
+            resolve();
+        }
+        resolve();
+    });
+}
+
 function isNumeric(value: string) {
     if (typeof value !== "string") return false;
     return !isNaN(+value) && !isNaN(parseFloat(value));

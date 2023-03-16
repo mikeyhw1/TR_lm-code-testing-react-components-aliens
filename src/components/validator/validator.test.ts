@@ -6,6 +6,7 @@ import {
     test_failMinValue,
     test_failNoNumbers,
     test_failNoSpecialCharacters,
+    test_failValidEntry,
 } from "./validator";
 
 describe("test test_failMinLength", () => {
@@ -207,6 +208,56 @@ describe("test test_failMatchAnswer", () => {
         const validateResult = { validationError: false, tempErrorMsgArray: [] };
         const inputName = "testing";
         await test_failMatchAnswer(input, answer, validateResult, inputName);
+        expect(validateResult.validationError).toBe(true);
+    });
+});
+
+describe("test test_failValidEntry", () => {
+    it("returns false if valiation pass, test valid entry with string", async () => {
+        const input = "abc";
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(false);
+    });
+
+    it("returns false if valiation pass, test valid entry with number", async () => {
+        const input = 123;
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(false);
+    });
+
+    it("returns true if valiation fail, test null", async () => {
+        const input = null;
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(true);
+    });
+
+    it("returns true if valiation fail, test undefined", async () => {
+        const input = undefined;
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(true);
+    });
+
+    it("returns true if valiation fail, test 0", async () => {
+        const input = 0;
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
+        expect(validateResult.validationError).toBe(true);
+    });
+
+    it("returns true if valiation fail, test empty string", async () => {
+        const input = "";
+        const validateResult = { validationError: false, tempErrorMsgArray: [] };
+        const inputName = "testing";
+        await test_failValidEntry(input, validateResult, inputName);
         expect(validateResult.validationError).toBe(true);
     });
 });

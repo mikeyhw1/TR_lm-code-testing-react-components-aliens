@@ -1,7 +1,12 @@
 import { useState } from "react";
 
 import ErrorMsg from "./ErrorMsg";
-import { test_failMaxLength, test_failMinLength, test_failNoSpecialCharacters } from "../validator/validator";
+import {
+    test_failMaxLength,
+    test_failMinLength,
+    test_failNoSpecialCharacters,
+    test_failValidEntry,
+} from "../validator/validator";
 
 interface PlanetNameProps {
     input: string;
@@ -57,6 +62,7 @@ export const validation_planetName = async (
     await test_failMinLength(testInput, 2, validateResult, "Planet Name");
     await test_failMaxLength(testInput, 49, validateResult, "Planet Name");
     await test_failNoSpecialCharacters(testInput, validateResult, "Planet Name");
+    await test_failValidEntry(testInput, validateResult, "Planet Name");
     return validateResult;
 };
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ErrorMsg from "./ErrorMsg";
-import { test_failIsNumbers, test_failMinValue } from "../validator/validator";
+import { test_failIsNumbers, test_failMinValue, test_failValidEntry } from "../validator/validator";
 
 interface NumberOfBeingsProps {
     input: number;
@@ -55,6 +55,7 @@ export const validation_numberOfBeings = async (
 ) => {
     await test_failIsNumbers(testInput, validateResult, "Number of beings");
     await test_failMinValue(testInput, 1000000000, validateResult, "Number of beings");
+    await test_failValidEntry(testInput, validateResult, "Number of beings");
     return validateResult;
 };
 
